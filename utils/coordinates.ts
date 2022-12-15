@@ -3,6 +3,12 @@ export type Coordinate = [number, number];
 export const coordinatesAreSame = (a: Coordinate, b: Coordinate): boolean =>
   a[0] === b[0] && a[1] === b[1];
 
+export const coordinateDistance = (a: Coordinate, b: Coordinate): number => {
+  const dy = Math.abs(a[0] - b[0]);
+  const dx = Math.abs(a[1] - b[1]);
+  return dy + dx;
+};
+
 export class CoordinateSet {
   private data = new Map<number, Set<number>>();
 
