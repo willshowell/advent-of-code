@@ -10,6 +10,7 @@ export const coordinateDistance = (a: Coordinate, b: Coordinate): number => {
 };
 
 export class CoordinateSet {
+  public size = 0;
   private data = new Map<number, Set<number>>();
 
   constructor(coordinates?: Iterable<Coordinate>) {
@@ -21,6 +22,12 @@ export class CoordinateSet {
   }
 
   add([first, second]: Coordinate) {
+    if (this.has([first, second])) {
+      return;
+    }
+
+    this.size += 1;
+
     if (!this.data.has(first)) {
       this.data.set(first, new Set<number>());
     }
@@ -32,7 +39,7 @@ export class CoordinateSet {
     return this.data.has(first) && this.data.get(first)!.has(second);
   }
 
-  entries(): Coordinate[] {
+  values(): Coordinate[] {
     const result: Coordinate[] = [];
     for (const [first, secondSet] of this.data.entries()) {
       for (const second of secondSet) {
